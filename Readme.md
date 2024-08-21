@@ -2,15 +2,15 @@
 This script analyzes and displays information about various queues, focusing on key metrics like **queue name** , **body size** , and **number of occurrences**. The data can be used to monitor and troubleshoot different system queues effectively.
 Key Features
 
-    Queue Name Identification: Lists the names of all queues being tracked.
-    Body Size Reporting: Shows the size of each queue's payload, enabling better optimization and management.
-    Queue Count Tracking: Tracks the number of times each queue appears, helping identify high-traffic or problematic queues.
+- Queue Name Identification: Lists the names of all queues being tracked.
+- Body Size Reporting: Shows the size of each queue's payload, enabling better optimization and management.
+- Queue Count Tracking: Tracks the number of times each queue appears, helping identify high-traffic or problematic queues.
 
 ## Use Cases
 
-    System Monitoring: Keep track of queue behavior and identify bottlenecks or errors quickly.
-    Performance Optimization: Gain insights into queue sizes and usage patterns to optimize system performance.
-    Debugging and Troubleshooting: Spot specific queues with large body sizes or frequent occurrences that may require attention
+- System Monitoring: Keep track of queue behavior and identify bottlenecks or errors quickly.
+- Performance Optimization: Gain insights into queue sizes and usage patterns to optimize system performance.
+- Debugging and Troubleshooting: Spot specific queues with large body sizes or frequent occurrences that may require attention
 
 ## Queue Monitor Script Output
 
@@ -31,8 +31,8 @@ Key Features
 
 ## How to Use
 
-    1- give this repository a Start :)
-    2- change Rabbit-address and user & pass in script
+1- give this repository a Start :)
+2- change Rabbit-address and user & pass in script
 
 ```
 curl -u USERNAME:PASSWORD http://YOUR_RABBIT_ADDR:15672/api/queues/%2f?columns=name,messages,message_bytes,consumers |  jq -r '.[] | select(.consumers == 0 and .message_bytes > 0) | { name: .name, messages: .messages, message_bytes_mb: (.message_bytes / 1048576) } | [.message_bytes_mb, .name, .messages] | @tsv'   | sort -n
