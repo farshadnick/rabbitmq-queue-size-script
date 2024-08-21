@@ -30,8 +30,10 @@ Key Features
 
 
 ## How to Use
+
     1- give this repository a Start :)
     2- change Rabbit-address and user & pass in script
-    ```
+
+```
 curl -u USERNAME:PASSWORD http://YOUR_RABBIT_ADDR:15672/api/queues/%2f?columns=name,messages,message_bytes,consumers |  jq -r '.[] | select(.consumers == 0 and .message_bytes > 0) | { name: .name, messages: .messages, message_bytes_mb: (.message_bytes / 1048576) } | [.message_bytes_mb, .name, .messages] | @tsv'   | sort -n
-    ```
+```
